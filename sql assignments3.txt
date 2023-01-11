@@ -1,0 +1,11 @@
+SELECT * FROM orders
+WHERE customerId IN (SELECT id FROM customers WHERE phone='8765342356')
+
+SELECT * FROM product
+WHERE category='natural'
+
+SELECT * FROM orders
+WHERE customerId IN (SELECT id FROM customers WHERE country NOT LIKE 'germany')
+
+SELECT * FROM orders
+WHERE id IN (SELECT orderId FROM orderItem WHERE productId IN (SELECT id FROM product WHERE productName LIKE 'chai'))

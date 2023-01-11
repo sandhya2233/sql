@@ -1,0 +1,64 @@
+INSERT INTO customers
+VALUES (206, 'Jimin', 'Park', 'Hamburg', 'Germany', '030-0074321');
+
+SELECT id,firstname,lastname,city,phone FROM customers
+WHERE country='Germany'
+SELECT firstname,lastname FROM customers
+ALTER TABLE customers
+ADD Faxnumber nvarchar;
+SELECT * FROM customers WHERE firstname LIKE '_U%';
+ALTER TABLE orderItem
+
+
+SELECT * FROM orderItem
+WHERE id IN (SELECT orderId FROM orderItem WHERE unitPrice BETWEEN 1000 AND 10000)
+ALTER TABLE orders
+ADD shippingDate datetime;
+UPDATE orders
+SET shippingDate = '2023-01-03'
+WHERE id = 303
+SELECT * FROM orders
+WHERE shippingDate IS NOT NULL
+ORDER BY shippingDate;
+
+ALTER TABLE orders
+ADD shipName varchar(20);
+
+SELECT * FROM orders;
+SELECT * FROM orderItem;
+SELECT * FROM product;
+UPDATE orders
+SET shipName = 'La corned abondance'
+WHERE id = 301
+SELECT * FROM orders
+WHERE shipName LIKE 'La corned abondance' AND (shippingDate BETWEEN '2023-01-01' AND '2023-01-15');
+SELECT productId, AVG(quantity) AS average FROM orderItem
+GROUP BY productId;
+
+ALTER TABLE orders
+ADD shippingCompany varchar(20);
+
+UPDATE orders
+SET shippingCompany = 'Amazon'
+WHERE id = 303
+
+SELECT shippingCompany, shipName FROM orders WHERE shipNAME IS NOT NULL
+
+ALTER TABLE product
+ADD Category varchar(20);
+
+UPDATE product
+SET Category = 'portable'
+WHERE id = 106;
+
+ALTER TABLE product
+ADD discount int;
+
+UPDATE product
+SET discount = 0
+WHERE id = 106;
+
+SELECT productName, category, unitPrice - discount AS price FROM product;
+
+SELECT shippingCompany, totalAmount AS totalPrice FROM orders
+WHERE shippingCompany LIKE 'Amazon' AND totalAmount > 50000
